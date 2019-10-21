@@ -127,6 +127,8 @@ def getRecord(source, title):
     data = []
     for i in range(3,100):
         context = html.xpath('//table[@class="cdrtable"][1]/tbody/tr[{}]/td/text()'.format(i))
+        headers = html.xpath('//table[@class="cdrtable"][1]/tbody/tr[2]/td/text()')
+
         if len(context) == 0:
             break
         number = context[0]
@@ -140,15 +142,15 @@ def getRecord(source, title):
         all = context[8]
 
         dic = {
-            "对方号码": number,
-            "呼叫类型": phoneType,
-            "通话起始时间": time,
-            "通话时长":length,
-            "通话地": location,
-            "通话类型":callType,
-            "通话费":fee,
-            "减免":reduce,
-            "费用小计":all,
+            headers[1]: number,
+            headers[2]: phoneType,
+            headers[3]: time,
+            headers[4]:length,
+            headers[5]: location,
+            headers[6]:callType,
+            headers[7]:fee,
+            headers[8]:reduce,
+            headers[9]:all,
         }
 
         data.append(dic)
